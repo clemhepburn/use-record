@@ -3,7 +3,7 @@ import { UNDO, REDO, RECORD } from './actions.js';
 export const initialState = {
   before: [],
   current: '#ff0000',
-  after: []
+  after: [],
 };
 
 export const reducer = (state, action) => {
