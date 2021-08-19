@@ -1,8 +1,8 @@
-import { UNDO, REDO, RECORD } from './actions.js';
+import { UNDO, REDO, RECORD } from './actions';
 
 export const initialState = {
   before: [],
-  current: '#ff0000',
+  current: '#00ff00',
   after: [],
 };
 
@@ -14,7 +14,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         after: [current, ...after],
-        curent: before[before.length - 1],
+        current: before[before.length - 1],
         before: before.slice(0, -1)
       };
     case REDO:
