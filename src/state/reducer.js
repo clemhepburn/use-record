@@ -9,7 +9,7 @@ export const initialState = {
 export const reducer = (state, action) => {
   const { before, current, after } = state;
 
-  switch(action.type) {
+  switch (action.type) {
     case UNDO:
       return {
         ...state,

@@ -11,7 +11,7 @@ export const setRedo = () => ({
   type: REDO
 });
 
-export const setRecord = () => ({
+export const setRecord = (current) => ({
   type: RECORD,
   payload: current
 });

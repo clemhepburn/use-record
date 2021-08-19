@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
+import { ReduxProvider } from '../../state/ReduxProvider';
+import { reducer, initialState } from '../../state/reducer';
 
 describe('App component', () => {
   it('renders App', () => {
-    render(<App />);
+    render(
+      <ReduxProvider reducer={reducer} initialState={initialState}>
+        <App />
+      </ReduxProvider>
+    );
 
     const display = screen.getByTestId('display');
     expect(display).toHaveStyle({ backgroundColor: '#ff0000' });
@@ -21,6 +27,6 @@ describe('App component', () => {
     fireEvent.click(redoButton);
     expect(display).toHaveStyle({ backgroundColor: '#090909' });
 
-  
+
   });
 });
