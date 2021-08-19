@@ -1,38 +1,24 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React from 'react';
+import { setRecord, setUndo, setRedo } from '../../state/actions.js';
+import { useDispatch, useSelector } from '../../state/ReduxProvider.jsx';
+import { selectCurrent } from '../../state/selectors.js';
 
-const useRecord = (init) => {
-  const [before, setBefore] = useState([]);
-  const [current, setCurrent] = useState(init);
-  const [after, setAfter] = useState([]);
+function App() {
+  const current = useSelector(selectCurrent);
+  const dispatch = useDispatch();
 
   const undo = () => {
-    setAfter((after) => [current, ...after]);
-    setCurrent(before[before.length - 1]);
-    setBefore((before) => before.slice(0, -1));
+    dispatch(setUndo());
   };
 
   const redo = () => {
-    setBefore((before) => [...before, current]);
-    setCurrent(after[0]);
-    setAfter((after) => after.slice(1));
+    dispatch(setRedo());
   };
 
-  const record = (val) => {
-    setBefore((before) => [...before, current]);
-    setCurrent(val);
+  const record = (current) => {
+    dispatch(setRecord(current));
   };
-
-  return {
-    undo,
-    record,
-    redo,
-    current,
-  };
-};
-
-function App() {
-  const { current, undo, redo, record } = useRecord('#FF0000');
 
   return (
     <>
